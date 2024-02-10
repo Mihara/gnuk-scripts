@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Through USB.
+
+# Clear out other programs trying to access the card.
+sudo systemctl stop pcscd
+gpg-connect-agent "SCD KILLSCD" "SCD BYE" /bye
+
+pushd gnuk/tool
+./upgrade_by_passwd.py ../regnual/regnual.bin ../../bin/gnuk-ST_DONGLE.bin
+popd

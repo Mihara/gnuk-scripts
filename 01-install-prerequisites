@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# This assumes Ubuntu, and should probably work on Debian.
+
+sudo apt install \
+    build-essential \
+    binutils-arm-none-eabi \
+    gcc-arm-none-eabi \
+    picolibc-arm-none-eabi \
+    gdb-multiarch \
+    openocd

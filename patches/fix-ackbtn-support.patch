@@ -1,0 +1,54 @@
+From 60f62e196858baed8ebaf6050bfadcea535d7a16 Mon Sep 17 00:00:00 2001
+From: David Guillen Fandos <david@davidgf.net>
+Date: Tue, 18 Feb 2020 00:10:36 +0100
+Subject: [PATCH] Fix ACKBTN_SUPPORT support
+
+Was broken due to a goto label and linker issue due to missing
+functions.
+---
+ gnuk/src/usb-ccid.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/src/usb-ccid.c b/src/usb-ccid.c
+index e76a1f3..0cc4950 100644
+--- a/gnuk/src/usb-ccid.c
++++ b/gnuk/src/usb-ccid.c
+@@ -1752,12 +1752,14 @@ ccid_thread (void *arg)
+     struct ep_out *epo = &endpoint_out;
+     struct apdu *a = &apdu;
+ 
++#ifdef ACKBTN_SUPPORT
+     if (ackbtn_active)
+       {
+ 	ackbtn_active = 0;
+ 	ackbtn_disable ();
+ 	led_blink (LED_WAIT_FOR_BUTTON);
+       }
++#endif
+ 
+     epi_init (epi, ENDP1, c);
+     epo_init (epo, ENDP1, c);
+@@ -1860,9 +1862,7 @@ ccid_thread (void *arg)
+       else if (m == EV_EXEC_FINISHED)
+ 	if (c->ccid_state == CCID_STATE_EXECUTE)
+ 	  {
+-#ifdef ACKBTN_SUPPORT
+ 	  exec_done:
+-#endif
+ 	    if (c->a->sw == GPG_THREAD_TERMINATED)
+ 	      {
+ 		c->sw1sw2[0] = 0x90;
+@@ -1932,8 +1932,10 @@ ccid_thread (void *arg)
+ 	  if (c->timeout_cnt == 7
+ 	      && c->ccid_state == CCID_STATE_ACK_REQUIRED_1)
+ 	    {
++#ifdef ACKBTN_SUPPORT
+ 	      ackbtn_active = 0;
+ 	      ackbtn_disable ();
++#endif
+ 	      led_blink (LED_WAIT_FOR_BUTTON);
+ 	      c->a->sw = GPG_ACK_TIMEOUT;
+ 	      c->a->res_apdu_data_len = 0;
+-- 
+GitLab
+

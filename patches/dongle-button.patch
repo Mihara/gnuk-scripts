@@ -1,0 +1,21 @@
+diff --git a/contrib/ackbtn-stm32f103.c b/contrib/ackbtn-stm32f103.c
+index 88d7d42..e49888e 100644
+--- a/gnuk/chopstx/contrib/ackbtn-stm32f103.c
++++ b/gnuk/chopstx/contrib/ackbtn-stm32f103.c
+@@ -75,6 +75,16 @@ ackbtn_init (chopstx_intr_t *intr)
+       pin_config |= PINCFG_EDGE_RISING;
+       break;
+ 
++    case BOARD_ID_ST_DONGLE:
++    case 0xa1099d43: /* blue pill */
++      /* PA5 (marked SWCLK on the STLINK board) is connected to a switch */
++      afio_exticr_index = 0;
++      afio_exticr_extiX_pY = AFIO_EXTICR2_EXTI5_PA;
++      irq_num = EXTI9_5_IRQ;
++      pin_config = 0x0020; /* EXTI_PR_PR5 == EXTI_IMR_MR5 == EXTI_RTSR_TR5 */
++      pin_config |= PINCFG_EDGE_RISING;
++      break;
++
+     case BOARD_ID_FST_01SZ:
+     default:
+       /* PA3 is connected to a hall sensor DRV5032FA */

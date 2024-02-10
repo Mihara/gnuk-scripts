@@ -1,0 +1,4 @@
+# Obviously, gnuk itself is not part of the repo.
+gnuk/
+# Built binaries aren't either.
+bin/

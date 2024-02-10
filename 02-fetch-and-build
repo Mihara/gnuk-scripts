@@ -1,0 +1,35 @@
+#!/bin/bash
+
+echo === Downloading Gnuk
+
+rm -rf gnuk
+git clone --recurse-submodules https://salsa.debian.org/gnuk-team/gnuk/gnuk.git
+
+echo === Settling on known version and applying patches.
+
+pushd gnuk
+git checkout release/2.1
+popd
+patch -u -p1 -i patches/dongle-button.patch
+patch -u -p1 -i patches/fix-ackbtn-support.patch
+
+mkdir -p bin
+
+function buildfirmware() {
+	echo === Building for $1
+	pushd gnuk/src
+	make clean
+	export kdf_do=optional
+	./configure --vidpid=234b:0000 --enable-factory-reset --target=$1
+	make
+	mv build/gnuk.bin ../../bin/gnuk-$1.bin
+	popd
+}
+
+# buildfirmware BLUE_PILL
+
+buildfirmware ST_DONGLE
+
+pushd gnuk/regnual
+make
+popd
