@@ -32,7 +32,7 @@ If you wish to update the firmware on a completed token, the `04-reupload-stlink
 
 Good luck!
 
-![STLink boards I used, for reference](img/completed.jpg)
+![STLink boards I used, for reference](img/in-progress.jpg)
 
 ![I think the results look neat](img/completed.jpg)
 
