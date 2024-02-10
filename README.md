@@ -10,7 +10,7 @@ Review all shell scripts before you run them and generally be vigilant, because 
 
 ## Tools and materials
 
-* You need an ST-Link V2 clone dongle. While these are dirt cheap, buying them is a lottery, as you can get any number of variations, often multiple of them in the same batch, so hedge your bets. The script assumes an STLink clone based on a `Geahy APM32`, which is known to work well enough.
+* You need an ST-Link V2 clone dongle. While these are dirt cheap, buying them is a lottery, as you can get any number of variations, often multiple of them in the same batch, so hedge your bets. The script assumes an STLink clone based on a `Geehy APM32`, which is known to work well enough.
 * You need a 6x6x5 push button -- at least, the enclosed 3D models in `models` to print an endcap assume you're using one, but you have options. Many people seem to have built one using switches scavenged from mouse buttons, although this will require further mechanical and electrical considerations. Once you can get the firmware running, and get rid of the extraneous stock pin header, you can bend the pins just right and solder the button between +3.3v and SWCLK pads. (and *not* GND and SWCLK as some of the sources say)
 * You need access to a 3D printer or at the very least some [Sugru or equivalent](https://sugru.com/what-is-sugru). And/or expoxy, because the paranoid consensus is that you should fill such a device with epoxy to make it as painful to disassemble as possible: STM32 processors do not have a key enclave and are only tamper-resistant up to a point.
 * You need [FreeCAD](https://www.freecad.org/) to tinker with the models and/or print them.
