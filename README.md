@@ -12,7 +12,7 @@ Review all shell scripts before you run them and generally be vigilant, because 
 
 * You need an ST-Link V2 clone dongle. While these are dirt cheap, buying them is a lottery, as you can get any number of variations, often multiple of them in the same batch, so hedge your bets. The script assumes an STLink clone based on a `Geehy APM32`, which is known to work well enough.
 * You need a 6x6x5 push button -- at least, the enclosed 3D models in `models` to print an endcap assume you're using one, but you have options. Many people seem to have built one using switches scavenged from mouse buttons, although this will require further mechanical and electrical considerations. Once you can get the firmware running, and get rid of the extraneous stock pin header, you can bend the pins just right and solder the button between +3.3v and SWCLK pads. (and *not* GND and SWCLK as some of the sources say)
-* You need access to a 3D printer or at the very least some [Sugru or equivalent](https://sugru.com/what-is-sugru). And/or expoxy, because the paranoid consensus is that you should fill such a device with epoxy to make it as painful to disassemble as possible: STM32 processors do not have a key enclave and are only tamper-resistant up to a point.
+* You need access to a 3D printer or at the very least some [Sugru or equivalent](https://sugru.com/what-is-sugru). And/or epoxy, because the paranoid consensus is that you should fill such a device with epoxy to make it as painful to disassemble as possible: STM32 processors do not have a key enclave and are only tamper-resistant up to a point.
 * You need [FreeCAD](https://www.freecad.org/) to tinker with the models and/or print them.
 * You need a piece of hardware to flash the dongles with [OpenOCD](https://openocd.org/). These scripts assume the use of a [DAP Link programmer](https://daplink.io/) *(in my case an app on the Flipper Zero, because I had that handy).*  When using anything else, you need to replace `interface/cmsis-dap.cfg` with the appropriate cfg file. When using the other STLink -- many people do, considering these dongles are cheap enough to buy a bunch -- use `interface/stlink.cfg`.
 
@@ -24,7 +24,7 @@ Consult the references below on how to connect your programming device to the ta
 2. `02-fetch-and-build`
 3. `03-upload-stlink`
 
-Poof, you're done -- you can get rid of the pin header and try to solder the button on. You will need to cut off two of the pins and bend the remaining ones just right if you want it to fit my 3D models.
+Poof, you're done -- you can get rid of the pin header and try to solder the button on. You will need to cut off two of the pins *(unless you found a comparatively rare 6x6x5 button with only two pins down the middle)* and bend the remaining ones just right if you want it to fit my 3D models.
 
 To get the button to actually function, you need a sufficiently recent version of GPG -- I've been using the [AppImage build obtained from the official source](https://www.gnupg.org/download/) which you can invoke with `./gnupg-desktop-2.4.3.0-x86_64.AppImage -c gpg --card-edit` to get at the GPG console. Then you will be able to issue `uif <n> on` command to make the dongle require a confirmation button press. The dongle will require this button press regardless of what invokes the corresponding function, so you can keep using it with the system version of GPG after that.
 
@@ -42,6 +42,9 @@ Good luck!
 * <https://techie-s.work/posts/2021/05/homemade-gnuk-with-stdongle/>
 * <https://blog.darkthread.net/blog/low-cost-diy-usb-security-key/>
 * <https://blog.darkthread.net/blog/flash-gnuk-notes/>
+* <https://blog.darkthread.net/blog/gpg-keytocard/>
+* <https://www.cnblogs.com/tibrella/p/17816505.html>
+* <https://kgame.tw/gnupg/stm32-gnuk/>
 * <https://blog.danman.eu/2-usb-crypto-token-for-use-with-gpg-and-ssh/>
 * <https://www.hobbiton.be/blog/repurpose-stlink/>
 * <https://github.com/capt8bit/GnukToken/blob/master/README.md>
