@@ -52,6 +52,7 @@ Good luck!
 * <https://habr.com/ru/articles/507010/>
 * <https://www.thingiverse.com/thing:3499355>
 * <https://blog.josefsson.org/2022/12/24/openpgp-key-on-fst-01sz/>
+* <https://we.easyelectronics.ru/STM32/elektronnyy-token-svoimi-rukami.html>
 
 See also `docs/gnuk-mailing-list-for-reference.txt` which is the archive of the Gnuk mailing list assembled into one text file for easier searching, and contains other relevant wisdom.
 
